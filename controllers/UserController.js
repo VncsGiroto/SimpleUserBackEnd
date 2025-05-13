@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
 class UserController {
-    /*static async getAll(req, res) {
+    static async getAll(req, res) {
         try {
             const users = await User.findAll();
             res.status(200)
@@ -13,7 +13,7 @@ class UserController {
             res.status(500)
                 .json({ error: 'Erro inesperado' });
         }
-    }*/
+    }
     static async create(req,res){
         try {
             const { nome, senha } = req.body;

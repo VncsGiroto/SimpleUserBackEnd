@@ -1,11 +1,13 @@
 import { Router } from "express";
 import UserController from "../controllers/UserController.js";
 import authUserMiddleware from "../middlewares/authUserMiddleware.js";
+import admPassword from "../middlewares/admPassword.js";
+
 const userRoutes = Router();
 
 //GET 
     //All
-    //userRoutes.get('/', UserController.getAll);
+    userRoutes.get('/', admPassword, UserController.getAll);
 //POST
     //Create
     userRoutes.post('/', UserController.create);
