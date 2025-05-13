@@ -5,7 +5,7 @@ const userRoutes = Router();
 
 //GET 
     //All
-    userRoutes.get('/', UserController.getAll);
+    //userRoutes.get('/', UserController.getAll);
 //POST
     //Create
     userRoutes.post('/', UserController.create);
