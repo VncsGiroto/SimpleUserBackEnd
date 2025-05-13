@@ -18,5 +18,5 @@ import userRoutes from "./routes/userRoutes.js";
 app.use('/user', userRoutes);
 
 app.listen(PORT, ()=>{
-  console.log(`Server ON || Hosted on: http://localhost:${PORT}`)
+  console.log(`Server ON || Hosted on: https://simpleuserbackend.onrender.com`)
 });
