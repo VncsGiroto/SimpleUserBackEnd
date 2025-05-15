@@ -11,7 +11,7 @@ class UserController {
                 .json(users);
         } catch (error) {
             res.status(500)
-                .json({ error: 'Erro inesperado' });
+                .json({ messages: 'Erro inesperado' });
         }
     }
     static async create(req,res){
@@ -24,7 +24,7 @@ class UserController {
             const IsUser = await User.findOne({where: {email},});
             if(IsUser){
                 res.status(401)
-                    .json({error: 'Email já cadastrado'});
+                    .json({messages: 'Email já cadastrado'});
                 return;
             }
 
@@ -36,18 +36,18 @@ class UserController {
 
             res.status(200)
                 .json({
-                    message: 'Usuario Criado',
+                    messages: 'Usuario Criado',
                     id: newUser.id
                 });
             
         } catch (error) {
             if(error.messages){
                 res.status(400)
-                    .json({error: error.messages});
+                    .json({messages: error.messages});
             }
             else{
-                res.status(500)
-                    .json({ error: 'Erro inesperado' });
+                res.status(400)
+                    .json({ messages: 'Erro inesperado' });
                     console.log(error);
             }
         }
@@ -59,16 +59,16 @@ class UserController {
             const IsUser = await User.findOne({where: {email},});
 
             if(!IsUser){
-                res.status(401)
-                    .json({error: 'Email Incorreto'});
+                res.status(400)
+                    .json({messages: 'Email Incorreto'});
                 return;
             }
 
             const IsCorrectPassword = await bcrypt.compare(senha, IsUser.senha);
 
             if(!IsCorrectPassword){
-                res.status(401)
-                .json({error: 'Senha Incorreta'});
+                res.status(400)
+                .json({messages: 'Senha Incorreta'});
                 return;
             }
 
@@ -76,24 +76,24 @@ class UserController {
 
             res.status(200)
                 .json({
-                    message: 'Usuário Logado',
+                    messages: 'Usuário Logado',
                     token
                 });
         } catch (error) {
             res.status(500)
-                .json({ error: 'Erro inesperado' });
+                .json({ messages: 'Erro inesperado' });
             console.log(error)
         }
     }
     static async checkToken(req, res) {
         try {
-            res.status(200)
+            res.status(400)
                 .json({
-                    message: 'Token Válido',
+                    messages: 'Token Válido',
                 });
         } catch (error) {
             res.status(500)
-                .json({ error: 'Erro inesperado' });
+                .json({ messages: 'Erro inesperado' });
             console.log(error)
         }
     }
