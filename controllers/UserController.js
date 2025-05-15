@@ -16,14 +16,21 @@ class UserController {
     }
     static async create(req,res){
         try {
-            const { nome, senha } = req.body;
+            const { email, senha } = req.body;
 
             //validator
             await checkInputValues.validate(req.body);
+            
+            const IsUser = await User.findOne({where: {email},});
+            if(IsUser){
+                res.status(401)
+                    .json({error: 'Email já cadastrado'});
+                return;
+            }
 
             const hashPassword = await bcrypt.hash(senha, Math.round(Math.random() * 2 + 10));
             const newUser = await User.create({
-                nome, 
+                email, 
                 senha: hashPassword,
             });
 
@@ -47,13 +54,13 @@ class UserController {
     }
     static async login(req, res) {
         try {
-            const { nome, senha } = req.body;
+            const { email, senha } = req.body;
 
-            const IsUser = await User.findOne({where: {nome},});
+            const IsUser = await User.findOne({where: {email},});
 
             if(!IsUser){
                 res.status(401)
-                    .json({error: 'Nome Incorreto'});
+                    .json({error: 'Email Incorreto'});
                 return;
             }
 
