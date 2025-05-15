@@ -9,10 +9,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json({limit: '8mb'}));
 app.use(express.static('static'));
 
-app.use(cors({
-    origin: '',
-    credentials: true
-}));
+app.use(cors({}));
 
 import userRoutes from "./routes/userRoutes.js";
 app.use('/user', userRoutes);
