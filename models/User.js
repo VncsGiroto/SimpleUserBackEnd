@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { userDB } from '../db/db.js'
 
 const User = userDB.define('User', {
-    nome: {
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
     },
