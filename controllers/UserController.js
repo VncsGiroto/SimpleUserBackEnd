@@ -87,7 +87,7 @@ class UserController {
     }
     static async checkToken(req, res) {
         try {
-            res.status(400)
+            res.status(200)
                 .json({
                     messages: 'Token Válido',
                 });
